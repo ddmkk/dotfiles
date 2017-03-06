@@ -1,0 +1,13 @@
+{
+    "env": {
+        "node": true,
+        "es6": true,
+        "browser": true
+    },
+    // eslintの推奨ルール
+    "extends": "eslint:recommended",
+    // ここから独自ルール
+    "rules": {
+        "no-console": 1
+    }
+}
