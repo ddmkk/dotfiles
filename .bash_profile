@@ -8,3 +8,5 @@ if [ -f ~/.bashrc ]; then
 . ~/.bashrc
 fi
 
+# expressコマンドへのパスを通す
+export PATH=/c/Users/kigane/npm:$PATH

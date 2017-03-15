@@ -218,8 +218,11 @@ augroup END
 " }}}
 augroup fileTypeIndent
     autocmd!
-    autocmd BufNewFile,BufRead *.scss setlocal tabstop=4 softtabstop=4 shiftwidth=4
+    autocmd BufNewFile,BufRead *.scss setlocal tabstop=2 softtabstop=2 shiftwidth=4
+    autocmd BufNewFile,BufRead *.css setlocal tabstop=2 softtabstop=2 shiftwidth=4
     autocmd BufNewFile,BufRead *.rb setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.html setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.pug setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 "---------------------------------------------------------------
@@ -229,13 +232,18 @@ augroup END
 " emmet-vim
 let g:user_emmet_leader_key='<C-e>'
 
+"--------------------------------------------
 " vim-indent-guides
-let g:indent_guides_auto_colors=0 "自動カラー無効
-let g:indent_guides_enable_on_vim_startup=1 "vim 起動時 プラグインを自動起動
-let g:indent_guides_guide_size=1 "ガイドの幅
-let g:indent_guides_color_change_percent=30
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#333333 ctermbg=black "奇数
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#444444 ctermbg=darkgray "偶数
+"--------------------------------------------
+" 自動カラー無効
+" let g:indent_guides_auto_colors=0
+" vim 起動時 プラグインを自動起動"
+let g:indent_guides_enable_on_vim_startup=1
+" ガイドの幅
+let g:indent_guides_guide_size=1
+" let g:indent_guides_color_change_percent=30
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#333333 ctermbg=black "奇数
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222222 ctermbg=darkgray "偶数
 
 "restart.vim
 " 終了時に保存するセッションオプションを設定する
@@ -309,6 +317,7 @@ endfunction
 
 "----------------------------------------------
 " Syntastic設定
+
 " オープン時にチェック
 let g:syntastic_check_on_open = 1
 " ファイル保存時にチェック
@@ -321,12 +330,21 @@ let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 " :wq で終了するときもチェックする
 let g:syntastic_check_on_wq = 0
-" javascriptチェックにeslintを使用
+
+let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': ['php', 'ruby', 'javascript', 'json'], 'passive_filetypes': [] }
+
+" ■javascript
 let g:syntastic_javascript_checkers = ['eslint']
 
-" PHP
+" ■php
+" 主に動いているのはPHPCodeSniffer
+" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['phpmd']
+" 引数でtab-width=4を指定しないと検証エラーになるので回避するため設定
+" let g:syntastic_php_phpcs_args='--tab-width=4'
 " なんでか分からないけど php コマンドのオプションを上書かないと動かなかった
-let g:syntastic_php_php_args = '-l'
+" let g:syntastic_php_php_args = '-l'
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -338,7 +356,6 @@ set statusline+=%*
 "     autocmd CursorMoved <buffer> call jslint#message()
 " endfunction
 " autocmd FileType javascript call s:javascript_filetype_settings()
-
 "----------------------------------------------
 " jshint 設定
 "jshint設定ファイルの場所を指定
