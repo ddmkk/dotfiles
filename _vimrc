@@ -1,89 +1,38 @@
-"--------------------------------------------------
-" プラグイン
-"--------------------------------------------------
-if 0 | endif
-
-if &compatible
+" vi互換の動作を無効にする（※.vimrcが存在する時点で無効と同義らしい）
+if !&compatible
     set nocompatible
 endif
 
-" Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'Shouge/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/vimproc.vim'
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'violetyk/neocomplete-php.vim'
-NeoBundle 'tpope/vim-fugitive',{'augroup':'fugitive'}
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'sjl/badwolf'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-" シングルクオートとダブルクオートの入れ替えなど
-NeoBundle 'tpope/vim-surround'
-" コメント関連
-NeoBundle 'tomtom/tcomment_vim'
-" HTML5タグもシンタックス認定
-NeoBundle 'othree/html5.vim'
-" CSS3もシンタックス追加
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'jelera/vim-javascript-syntax'
-" Emmet
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'AtsushiM/sass-compile.vim'
-NeoBundle 'tyru/restart.vim'
-NeoBundle 'vim-scripts/smarty-syntax'
-NeoBundle 'beyondwords/vim-twig'
-" 任意の2箇所のdiffを表示
-NeoBundle 'AndrewRadev/linediff.vim'
-" Gitの変更箇所をマーク
-NeoBundle 'airblade/vim-gitgutter'
-" 行末の余計な空白を削除
-NeoBundle 'bronson/vim-trailing-whitespace'
-" 検索を速く
-NeoBundle 'rking/ag.vim'
-" テキスト揃え
-NeoBundle 'junegunn/vim-easy-align'
-" NERDTree
-" NeoBundle 'scrooloose/nerdtree'
-" ファイル保存時にコードチェックを行う ESLint
-NeoBundle 'scrooloose/syntastic'
-" うまく動いていない
-" NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
-" JSLint （ESLintを使うのでコメントアウト）
-" NeoBundle 'basyura/jslint.vim'
-" splitjoin.vim
-NeoBundle 'AndrewRadev/splitjoin.vim'
-" EJSもシンタックス追加
-NeoBundle 'nikvdp/ejs-syntax'
-" ECMAScript2015(ES6)でのシンタックス追加
-NeoBundleLazy 'othree/yajs.vim', {'autoload':{'filetypes':['javascript']}}
-" pug（旧jade）シンタックス追加"
-NeoBundleLazy 'digitaltoad/vim-pug', {'autoload':{'filetypes':['pug']}}
-
-call neobundle#end()
-
-" Required:
-" filetypeプラグインによる indentをonに設定
-filetype plugin indent on
-
-NeoBundleCheck
-
-"}}}
-
 " rm.exeパス指定
-let $PATH = $PATH . ';C:\MinGW\bin;C:\MinGW\msys\1.0\bin'
+let $PATH = $PATH . ';C:\MinGW\bin;C:\MinGW\msys\1.0\bin;'
+
+" ------------------------------------------------
+" dein.vim
+" ------------------------------------------------
+" dein自体の自動インストール
+let s:dein_dir = expand('~/.vim/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if !isdirectory(s:dein_repo_dir)
+    execute "!git clone git@github.com:Shougo/dein.vim.git" s:dein_repo_dir
+endif
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+
+let s:toml = s:dein_dir . '/dein.toml'
+let s:toml_lazy = s:dein_dir . '/dein_lazy.toml'
+if dein#load_state(s:dein_dir)
+    call dein#begin(s:dein_dir)
+    call dein#load_toml(s:toml, {'lazy': 0})
+    call dein#load_toml(s:toml_lazy, {'lazy': 1})
+    call dein#end()
+    call dein#save_state()
+endif
+
+" 未インストールのプラグインがある場合、自動インストール
+if has('vim_starting') && dein#check_install()
+    call dein#install()
+endif
+
+filetype plugin indent on
 
 "---------------------------------------------------------------
 "基本
@@ -191,20 +140,37 @@ if has('syntax')
     call ZenkakuSpace()
 endif
 
-" {{{
+"-------------------------------------
 " ファイル保存時に無駄な空白を削除する
-" }}}
+function! s:Rtrim()
+    let s:cursor = getpos(".")
+    if &filetype == "markdown"
+        " .mdはブランク2個で改行なので削除せずアンダーラインを引く
+        %s/\s\+\(\s\{2}\)$/\1/e
+        match Underlined /\s\{2}/
+    else
+        %s/\s\+$//e
+    endif
+    call setpos(".", s:cursor)
+endfunction
+
 augroup FixWhiteSpace
     autocmd!
-    autocmd BufWritePre * :FixWhitespace
-    autocmd BufWritePre * :%s/\s\+$//e
+    " autocmd BufWritePre * :FixWhitespace
+    " autocmd BufWritePre * :%s/\s\+$//e
+    autocmd BufWritePre * :call s:Rtrim()
 augroup END
+" ------------------------------------
 
 " .vimrcを一瞬で開く、反映させる
 nnoremap <F5> :<C-u>edit $MYVIMRC<CR>
 nnoremap <F6> :<C-u>edit $MYGVIMRC<CR>
 nnoremap <F7> :<C-u>source $MYVIMRC<CR>
             \ :source $MYGVIMRC<CR>
+
+" dein.tomlを一瞬で開く
+nnoremap <F8> :<C-u>edit ~/.vim/dein/dein.toml<CR>
+nnoremap <F9> :<C-u>edit ~/.vim/dein/dein_lazy.toml<CR>
 
 " .vimrcを更新したら自動で反映させる
 augroup AutoloadVimrc
@@ -213,46 +179,59 @@ augroup AutoloadVimrc
     autocmd BufWritePost *.gvimrc if has('gui_running') source $MYGVIMRC
 augroup END
 
-" {{{
-" ファイルの種類別設定
-" }}}
+" ファイルの種類別インデント設定
 augroup fileTypeIndent
     autocmd!
-    autocmd BufNewFile,BufRead *.scss setlocal tabstop=2 softtabstop=2 shiftwidth=4
-    autocmd BufNewFile,BufRead *.css setlocal tabstop=2 softtabstop=2 shiftwidth=4
+    autocmd BufNewFile,BufRead *.scss setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.css setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.rb setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.html setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.pug setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
-"---------------------------------------------------------------
-" ここからプラグイン
-"---------------------------------------------------------------
+"--------------------------------------------
+" 見た目 （最小限）
+"--------------------------------------------
+colorscheme desert
+"シンタックスカラーリングを設定する
+syntax on
+"行番号を表示する
+set number
+"編集中のファイル名を表示する
+set title
+"入力中のコマンドを表示する
+set showcmd
 
-" emmet-vim
-let g:user_emmet_leader_key='<C-e>'
+" ===========================================
+" ▼プラグイン別設定
+" ===========================================
 
 "--------------------------------------------
-" vim-indent-guides
+" ★emmet-vim
+"--------------------------------------------
+let g:user_emmet_leader_key='<C-e>'
+let g:user_emmet_settings = {
+\   'variables': {
+\       'lang': "ja"
+\   }
+\ }
+
+"--------------------------------------------
+" ★vim-indent-guides
 "--------------------------------------------
 " 自動カラー無効
-" let g:indent_guides_auto_colors=0
+let g:indent_guides_auto_colors=0
 " vim 起動時 プラグインを自動起動"
 let g:indent_guides_enable_on_vim_startup=1
 " ガイドの幅
 let g:indent_guides_guide_size=1
-" let g:indent_guides_color_change_percent=30
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#333333 ctermbg=black "奇数
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222222 ctermbg=darkgray "偶数
+let g:indent_guides_color_change_percent=30
 
-"restart.vim
-" 終了時に保存するセッションオプションを設定する
-" ==========================================
-" let g:restart_sessionoptions
-            " \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#333333 ctermbg=black "奇数
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222222 ctermbg=darkgray "偶数
 
 " ------------------------------------------"
-"  Unite.vim
+" ★Unite.vim
 " -----------------------------------------"
 " 入力モードで開始
 let g:unite_enable_start_insert = 1
@@ -260,7 +239,6 @@ let g:unite_source_file_mru_limit = 200
 " file_mruの表示フォーマットを指定。空にすると表示スピードが高速化される
 let g:unite_source_file_mru_filename_format = ''
 " let g:unite_source_history_yank_enable = 1
-
 try
     let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
     call unite#filters#matcher_default#use(['mather_fuzzy'])
@@ -268,12 +246,9 @@ catch
 endtry
 " nnoremap <Space><Space> :split<CR> :<C-u>Unite -start-insert file_rec/async<CR>
 " :nnoremap <Space>r <Plug>(unite_start)
-
 let mapleader = "\<Space>"
-
 nnoremap [unite] <Nop>
 nmap <Leader>f [unite]
-
 " unite.vim keymap
 nnoremap [unite]u :<C-u>Unite -no-split<Space>
 " nnoremap [unite]u :<C-u>Unite<Space>
@@ -288,16 +263,25 @@ nnoremap <silent> [unite]u :<C-u>Unite<Space>file_mru<CR>
 nnoremap <silent> [unite]m :<C-u>Unite<Space>bookmark<CR>
 "レジスタ一覧
 nnoremap <silent> [unite]r :<C-u>Unite<Space>-buffer-name=register<Space>register<CR>
-
-" Netrw
-" set nocp
+" grep 検索
+nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" カーソル位置の単語をgrep検索
+nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+" grep 検索の再呼びだし
+nnoremap <silent> ,r :<C-u>UniteResume search-buffer<CR>
+" unite grepにag(The Silver Searcher)を使う
+if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+    let g:unite_source_grep_recursive_opt = ''
+endif
 
 "---------------------------------------------
-" VimFiler
+" ★VimFiler
 "---------------------------------------------
 let mapleader = "\<Space>"
-" nnoremap <silent><C-f> :VimFiler<CR>
-" nnoremap <F2> :VimFiler -buffer-name=explorer -split -winwidth=45 -toggle -no-quit<Cr>
+nnoremap <silent><C-f> :VimFiler<CR>
+nnoremap <F2> :VimFiler -buffer-name=explorer -split -winwidth=45 -toggle -no-quit<Cr>
 " Vimデフォルトのエクスプローラをvimfilerで置き換える
 let g:vimfiler_as_default_explorer = 1
 "セーフモードを無効
@@ -316,8 +300,8 @@ function! s:vimfiler_my_settings()
 endfunction
 
 "----------------------------------------------
-" Syntastic設定
-
+" ★Syntastic
+"----------------------------------------------
 " オープン時にチェック
 let g:syntastic_check_on_open = 1
 " ファイル保存時にチェック
@@ -330,18 +314,16 @@ let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 " :wq で終了するときもチェックする
 let g:syntastic_check_on_wq = 0
-
 let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': ['php', 'ruby', 'javascript', 'json'], 'passive_filetypes': [] }
-
-" ■javascript
+" javascript
 let g:syntastic_javascript_checkers = ['eslint']
 
-" ■php
+" php
 " 主に動いているのはPHPCodeSniffer
 " let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_checkers = ['phpmd']
 " 引数でtab-width=4を指定しないと検証エラーになるので回避するため設定
-" let g:syntastic_php_phpcs_args='--tab-width=4'
+let g:syntastic_php_phpcs_args='--tab-width=4'
 " なんでか分からないけど php コマンドのオプションを上書かないと動かなかった
 " let g:syntastic_php_php_args = '-l'
 
@@ -362,16 +344,14 @@ set statusline+=%*
 " let g:syntastic_javascript_jshint_args = '--config "' . $HOME . '/.jshintrc'
 " let g:syntastic_javascript_jshint_config = $HOME . '/.jshintrc'
 " let g:syntastic_debug = 3
-
 "-----------------------------------------------
 " splitjoin.vim キーバインディング（Rubyメイン）
-let g:splitjoin_split_mapping = ''
-let g:splitjoin_join_mapping = ''
+" let g:splitjoin_split_mapping = ''
+" let g:splitjoin_join_mapping = ''
 " 1行を複数行に展開
-nmap <Leader>s :SplitjoinSplit<CR>
+" nmap <Leader>s :SplitjoinSplit<CR>
 " 複数行を1行に格納
-nmap <Leader>j :SplitjoinJoin<CR>
-
+" nmap <Leader>j :SplitjoinJoin<CR>
 "-----------------------------------------------
 " ejsファイルのシンタックス設定
 autocmd BufNewFile,BufRead *.ejs set filetype=ejs
@@ -384,10 +364,9 @@ function! s:DetectEjs()
 endfunction
 
 autocmd BufNewFile,BufRead * call s:DetectEjs()
-"-----------------------------------------------
+
 " ECMAScript2015(ES6)のシンタックス設定
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
-"-----------------------------------------------
-" pug(旧jade)のシンタックス設定
 autocmd BufRead,BufNewFile,BufReadPre *.pug setfiletype pug
+autocmd BufRead,BufNewFile,BufReadPre *.md setfiletype markdown
 

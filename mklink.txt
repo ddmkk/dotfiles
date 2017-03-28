@@ -1,0 +1,6 @@
+[mklink history]
+
+# 3017.03.28
+C:\Windows\system32>mklink %HOMEPATH%\.vim\dein\dein.toml %HOMEPATH%\dotfiles\dein.toml
+C:\Windows\system32>mklink %HOMEPATH%\.vim\dein\dein_lazy.toml %HOMEPATH%\dotfiles\dein_lazy.toml
+
