@@ -39,6 +39,8 @@ repo = 'vim-scripts/smarty-syntax'
 
 [[plugins]]
 repo = 'beyondwords/vim-twig'
+# repo = 'evidens/vim-twig'
+on_ft = 'twig'
 
 [[plugins]]
 repo = 'digitaltoad/vim-pug'

@@ -187,6 +187,7 @@ augroup fileTypeIndent
     autocmd BufNewFile,BufRead *.rb setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.html setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.pug setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 "--------------------------------------------
@@ -314,7 +315,9 @@ let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 " :wq で終了するときもチェックする
 let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': ['php', 'ruby', 'javascript', 'json'], 'passive_filetypes': [] }
+let g:syntastic_mode_map = {'mode': 'passive',
+                            \ 'active_filetypes': ['php', 'ruby', 'javascript', 'json'],
+                            \ 'passive_filetypes': [] }
 " javascript
 let g:syntastic_javascript_checkers = ['eslint']
 
