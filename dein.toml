@@ -57,6 +57,9 @@ repo = 'AndrewRadev/linediff.vim'
 [[plugins]] # コードチェック
 repo = 'scrooloose/syntastic'
 
+[[plugins]] # editorconfig
+repo = 'editorconfig/editorconfig-vim'
+
 # スニペット
 
 [[plugins]]

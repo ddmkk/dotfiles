@@ -281,7 +281,10 @@ endif
 " ★VimFiler
 "---------------------------------------------
 let mapleader = "\<Space>"
-nnoremap <silent><C-f> :VimFiler<CR>
+
+" ▼カーソルの動きとバッティングするのでコメントアウト
+" nnoremap <silent><C-f> :VimFiler<CR>
+
 nnoremap <F2> :VimFiler -buffer-name=explorer -split -winwidth=45 -toggle -no-quit<Cr>
 " Vimデフォルトのエクスプローラをvimfilerで置き換える
 let g:vimfiler_as_default_explorer = 1
