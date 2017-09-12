@@ -2,8 +2,10 @@
 " colorscheme desert
 " colorscheme jellybeans
 " colorscheme molokai
-" colorscheme hybrid
-colorscheme badwolf
+colorscheme hybrid
+" colorscheme badwolf
+" colorscheme gotham
+" colorscheme landscape
 set background=dark
 "-------------------------------------------------------
 let g:molokai_original = 0
@@ -17,6 +19,8 @@ set showmatch   "閉じ括弧の入力時に対応する括弧を表示する
 set matchtime=3 "showmatchの表示時間
 set laststatus=2    "ステータスラインを常に表示する
 set guifont=Migu_1M:h11:cSHIFTJIS "フォント設定
+" set guifont=Ricty:h11:cSHIFTJIS "フォント設定
+" set guifont=*
 set textwidth=0
 "--------------------------------------------------------
 "メニューの文字化け回避

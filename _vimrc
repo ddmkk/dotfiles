@@ -4,7 +4,8 @@ if !&compatible
 endif
 
 " rm.exeパス指定
-let $PATH = $PATH . ';C:\MinGW\bin;C:\MinGW\msys\1.0\bin;'
+" let $PATH = $PATH . ';C:\MinGW\bin;C:\MinGW\msys\1.0\bin;'
+let $PATH = $PATH . ';C:\tools\msys64\usr\bin;'
 
 " ------------------------------------------------
 " dein.vim
@@ -106,6 +107,8 @@ nnoremap k gk
 inoremap <silent> jj <ESC>
 " 2回ESCを押したら検索のハイライトをやめる
 nmap <Esc><Esc> :nohlsearch<CR><ESC>
+" 自動的に日本語入力モードを解除する
+inoremap <ESC><ESC> :set iminsert=0<CR>
 " ハイライトを一時的に無効化するショートカット
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 "Yを行末までのヤンクとする
@@ -173,11 +176,11 @@ nnoremap <F8> :<C-u>edit ~/.vim/dein/dein.toml<CR>
 nnoremap <F9> :<C-u>edit ~/.vim/dein/dein_lazy.toml<CR>
 
 " .vimrcを更新したら自動で反映させる
-augroup AutoloadVimrc
-    autocmd!
-    autocmd BufWritePost *.vimrc source $MYVIMRC | set foldmethod=marker
-    autocmd BufWritePost *.gvimrc if has('gui_running') source $MYGVIMRC
-augroup END
+" augroup AutoloadVimrc
+"     autocmd!
+"     autocmd BufWritePost *.vimrc source $MYVIMRC | set foldmethod=marker
+"     autocmd BufWritePost *.gvimrc if has('gui_running') source $MYGVIMRC
+" augroup END
 
 " ファイルの種類別インデント設定
 augroup fileTypeIndent
@@ -188,6 +191,7 @@ augroup fileTypeIndent
     autocmd BufNewFile,BufRead *.html setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.pug setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.yml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 "--------------------------------------------
@@ -375,4 +379,32 @@ autocmd BufNewFile,BufRead * call s:DetectEjs()
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile,BufReadPre *.pug setfiletype pug
 autocmd BufRead,BufNewFile,BufReadPre *.md setfiletype markdown
+
+" ------------------------------------------------
+" ★Markdown Preview
+" ------------------------------------------------
+autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+let g:previm_open_cmd = ''
+nnoremap [previm] <Nop>
+nmap <Space>p [previm]
+nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
+nnoremap <silent> [previm]r :call previm#refresh()<CR>et g:previm_open_cmd = 'open -a chrome'
+
+" ------------------------------------------------
+" ★open-browser.vim
+" ------------------------------------------------
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+
+" ------------------------------------------------
+" ★VimShell
+" ------------------------------------------------
+let mapleader = "\<Space>"
+nnoremap <silent> <Leader>is :VimShell<CR>
+nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
+nnoremap <silent> <Leader>irb :VimShellInteractive irb<CR>
+vmap <silent> <Leader>ss :VimShellSendString<CR>
+nnoremap <silent> <Leader>ss :VimShellSendString<CR>
+nnoremap <silent> <Leader>ip :VimShellPop<CR>
 
