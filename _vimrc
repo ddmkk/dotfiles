@@ -408,3 +408,9 @@ vmap <silent> <Leader>ss :VimShellSendString<CR>
 nnoremap <silent> <Leader>ss :VimShellSendString<CR>
 nnoremap <silent> <Leader>ip :VimShellPop<CR>
 
+" -------------------------------------------------
+" 辞書ファイルの登録
+" -------------------------------------------------
+" PHPとWordPress
+autocmd FileType php :set dictionary=~/.vim/dict/PHP.dict,~/.vim/dict/vim-dict-wordpress/functions.dict,~/.vim/dict/vim-dict-wordpress/action-hooks.dict,~/.vim/dict/vim-dict-wordpress/filter-hooks.dict
+
