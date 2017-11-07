@@ -30,7 +30,7 @@ endif
 
 " 未インストールのプラグインがある場合、自動インストール
 if has('vim_starting') && dein#check_install()
-    call dein#install()
+   call dein#install()
 endif
 
 filetype plugin indent on
@@ -197,7 +197,7 @@ augroup END
 "--------------------------------------------
 " 見た目 （最小限）
 "--------------------------------------------
-colorscheme desert
+" colorscheme hybrid
 "シンタックスカラーリングを設定する
 syntax on
 "行番号を表示する
@@ -212,28 +212,22 @@ set showcmd
 " ===========================================
 
 "--------------------------------------------
-" ★emmet-vim
-"--------------------------------------------
-let g:user_emmet_leader_key='<C-e>'
-let g:user_emmet_settings = {
-\   'variables': {
-\       'lang': "ja"
-\   }
-\ }
-
-"--------------------------------------------
 " ★vim-indent-guides
 "--------------------------------------------
-" 自動カラー無効
-let g:indent_guides_auto_colors=0
-" vim 起動時 プラグインを自動起動"
+" vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup=1
+" ガイドをスタートするインデントの量
+let g:indent_guides_start_level=2
+" 自動カラーを無効にする
+let g:indent_guides_auto_colors=0
+" 奇数インデントのカラー
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=gray
+" 偶数インデントのカラー
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=darkgray
+" ハイライト色の変化の幅
+let g:indent_guides_color_change_percent = 30
 " ガイドの幅
-let g:indent_guides_guide_size=1
-let g:indent_guides_color_change_percent=30
-
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#333333 ctermbg=black "奇数
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#222222 ctermbg=darkgray "偶数
+let g:indent_guides_guide_size = 1
 
 " ------------------------------------------"
 " ★Unite.vim
@@ -306,6 +300,16 @@ function! s:vimfiler_my_settings()
     nmap <buffer> q <Plug>(vimfiler_exit)
     nmap <buffer> Q <Plug>(vimfiler_hide)
 endfunction
+
+" 作者のページから使用
+let g:vimfiler_tree_leaf_icon = "｜"
+let g:vimfiler_tree_opened_icon = "▼"
+let g:vimfiler_tree_closed_icon = "▷"
+let g:vimfiler_readonly_file_icon = "🔒"
+
+" Use trashbox.
+" Windows only and require latest vimproc.
+"let g:unite_kind_file_use_trashbox = 1
 
 "----------------------------------------------
 " ★Syntastic
@@ -412,5 +416,5 @@ nnoremap <silent> <Leader>ip :VimShellPop<CR>
 " 辞書ファイルの登録
 " -------------------------------------------------
 " PHPとWordPress
-autocmd FileType php :set dictionary=~/.vim/dict/PHP.dict,~/.vim/dict/vim-dict-wordpress/functions.dict,~/.vim/dict/vim-dict-wordpress/action-hooks.dict,~/.vim/dict/vim-dict-wordpress/filter-hooks.dict
+autocmd FileType php :set dictionary=~/.vim/dict/php.dict,~/.vim/dict/vim-dict-wordpress/functions.dict,~/.vim/dict/vim-dict-wordpress/action-hooks.dict,~/.vim/dict/vim-dict-wordpress/filter-hooks.dict
 
