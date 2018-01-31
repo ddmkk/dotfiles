@@ -46,8 +46,8 @@ repo = 'AndrewRadev/linediff.vim'
 repo = 'scrooloose/syntastic'
 
 # ※うまく動かないのでコメントアウト
-# [[plugins]] # .eslintrcをプロジェクト毎変更可能に
-# repo = 'pmsorhaindo/syntastic-local-eslint.vim'
+[[plugins]] # .eslintrcをプロジェクト毎変更可能に
+repo = 'mtscout6/syntastic-local-eslint.vim'
 
 [[plugins]] # editorconfig
 repo = 'editorconfig/editorconfig-vim'

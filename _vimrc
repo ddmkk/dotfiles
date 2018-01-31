@@ -217,7 +217,7 @@ set showcmd
 " vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup=1
 " ガイドをスタートするインデントの量
-let g:indent_guides_start_level=2
+let g:indent_guides_start_level=1
 " 自動カラーを無効にする
 let g:indent_guides_auto_colors=0
 " 奇数インデントのカラー
@@ -384,6 +384,8 @@ autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile,BufReadPre *.pug setfiletype pug
 autocmd BufRead,BufNewFile,BufReadPre *.md setfiletype markdown
 
+" eslint
+autocmd BufRead,BufNewFile *.eslintrc setfiletype javascript
 " ------------------------------------------------
 " ★Markdown Preview
 " ------------------------------------------------
