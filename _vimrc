@@ -212,6 +212,12 @@ set showcmd
 " ===========================================
 
 "--------------------------------------------
+" ★vim-json
+" -------------------------------------------
+" クオテーションを省略しないようにする
+let g:vim_json_syntax_conceal = 0
+
+"--------------------------------------------
 " ★vim-indent-guides
 "--------------------------------------------
 " vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
@@ -327,7 +333,7 @@ let g:syntastic_auto_loc_list = 0
 " :wq で終了するときもチェックする
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {'mode': 'passive',
-                            \ 'active_filetypes': ['php', 'ruby', 'javascript', 'json'],
+                            \ 'active_filetypes': ['php', 'ruby', 'javascript'],
                             \ 'passive_filetypes': [] }
 " javascript
 let g:syntastic_javascript_checkers = ['eslint']
