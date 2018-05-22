@@ -59,6 +59,8 @@ depends = ['/vim-airline-themes']
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 
+
+
 # -----------------------------------------
 # Git関連
 # -----------------------------------------
