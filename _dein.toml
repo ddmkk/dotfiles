@@ -30,8 +30,6 @@ repo = 'nathanaelkane/vim-indent-guides'
 [[plugins]] # シングル・ダブルクウォートの入れ替えなど
 repo = 'tpope/vim-surround'
 
-# [[plugins]] # ステータスラインの色付け
-# repo = 'itchyny/lightline.vim'
 
 [[plugins]] # Agコマンドで検索を高速にする
 repo = 'rking/ag.vim'
@@ -52,14 +50,20 @@ repo = 'mtscout6/syntastic-local-eslint.vim'
 [[plugins]] # editorconfig
 repo = 'editorconfig/editorconfig-vim'
 
-[[plugins]]
-repo = 'vim-airline/vim-airline'
-depends = ['/vim-airline-themes']
+# [[plugins]]
+# repo = 'vim-airline/vim-airline'
+# depends = ['/vim-airline-themes']
 
-[[plugins]]
-repo = 'vim-airline/vim-airline-themes'
+# [[plugins]]
+# repo = 'vim-airline/vim-airline-themes'
 
-
+[[plugins]] # ステータスラインの色付け（※air-lineより軽いのでこちらに変更）
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ }
+'''
 
 # -----------------------------------------
 # Git関連
