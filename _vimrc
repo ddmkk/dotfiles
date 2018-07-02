@@ -12,10 +12,15 @@ let $PATH = $PATH . ';C:\tools\msys64\usr\bin;'
 " ------------------------------------------------
 " dein自体の自動インストール
 let s:dein_dir = expand('~/.vim/dein')
+
+" dein.vim実体があるディレクトリ
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vimが存在しなければgithubからcloneする
 if !isdirectory(s:dein_repo_dir)
     execute "!git clone git@github.com:Shougo/dein.vim.git" s:dein_repo_dir
 endif
+
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 let s:toml = s:dein_dir . '/dein.toml'
@@ -28,7 +33,6 @@ if dein#load_state(s:dein_dir)
     call dein#save_state()
 endif
 
-" 未インストールのプラグインがある場合、自動インストール
 if has('vim_starting') && dein#check_install()
    call dein#install()
 endif
@@ -320,6 +324,10 @@ let g:vimfiler_readonly_file_icon = "🔒"
 "----------------------------------------------
 " ★Syntastic
 "----------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 " オープン時にチェック
 let g:syntastic_check_on_open = 1
 " ファイル保存時にチェック
@@ -347,9 +355,6 @@ let g:syntastic_php_phpcs_args='--tab-width=4'
 " なんでか分からないけど php コマンドのオプションを上書かないと動かなかった
 " let g:syntastic_php_php_args = '-l'
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 "----------------------------------------------
 " JsLint 設定
 " function! s:javascript_filetype_settings()
@@ -426,3 +431,57 @@ nnoremap <silent> <Leader>ip :VimShellPop<CR>
 " PHPとWordPress
 autocmd FileType php :set dictionary=~/.vim/dict/php.dict,~/.vim/dict/vim-dict-wordpress/functions.dict,~/.vim/dict/vim-dict-wordpress/action-hooks.dict,~/.vim/dict/vim-dict-wordpress/filter-hooks.dict
 
+" =================================================
+" vim-airline
+" =================================================
+
+" Powerline系フォントを利用する
+set laststatus=2
+let g:airline_powerline_fonts = 1
+" タブを有効化する
+let g:airline#extensions#tabline#enabled = 1
+" タブに番号を表示する
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_theme = 'papercolor'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+" タブの区切り文字を指定する
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '☰'
+" let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
+
+" old vim-powerline symbols
+" let g:airline_left_sep = '⮀'
+" let g:airline_left_alt_sep = '⮁'
+" let g:airline_right_sep = '⮂'
+" let g:airline_right_alt_sep = '⮃'
+" let g:airline_symbols.branch = '⭠'
+" let g:airline_symbols.readonly = '⭤'
+" let g:airline_symbols.linenr = '⭡'
