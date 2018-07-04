@@ -76,6 +76,16 @@ repo ='tpope/vim-fugitive'
 repo = 'airblade/vim-gitgutter'
 
 # -----------------------------------------
+# シンタックス
+# -----------------------------------------
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+
+# -----------------------------------------
 # カラースキーム
 # -----------------------------------------
 
