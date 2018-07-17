@@ -488,3 +488,11 @@ let g:airline_symbols.whitespace = 'Ξ'
 " let g:airline_symbols.branch = '⭠'
 " let g:airline_symbols.readonly = '⭤'
 " let g:airline_symbols.linenr = '⭡'
+
+" ------------------------------------
+" Surround.vim
+" ------------------------------------
+" ビジュアルモードで選択後、"S-"入力で選択範囲をpタグで囲む
+let g:surround_{char2nr("-")} = "<p>\r</p>"
+
+
