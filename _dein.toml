@@ -50,20 +50,23 @@ repo = 'mtscout6/syntastic-local-eslint.vim'
 [[plugins]] # editorconfig
 repo = 'editorconfig/editorconfig-vim'
 
-# [[plugins]]
-# repo = 'vim-airline/vim-airline'
-# depends = ['/vim-airline-themes']
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+depends = ['/vim-airline-themes']
 
-# [[plugins]]
-# repo = 'vim-airline/vim-airline-themes'
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
 
-[[plugins]] # ステータスラインの色付け（※air-lineより軽いのでこちらに変更）
-repo = 'itchyny/lightline.vim'
-hook_add = '''
-    let g:lightline = {
-    \ 'colorscheme': 'wombat',
-    \ }
-'''
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+# [[plugins]] # ステータスラインの色付け（※air-lineより軽いのでこちらに変更）
+# repo = 'itchyny/lightline.vim'
+# hook_add = '''
+#     let g:lightline = {
+#     \ 'colorscheme': 'wombat',
+#     \ }
+# '''
 
 # -----------------------------------------
 # Git関連

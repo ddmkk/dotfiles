@@ -445,9 +445,12 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " タブに番号を表示する
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+" タブの切替キーバインド
+nmap <C-left> <Plug>AirlineSelectPrevTab
+nmap <C-right> <Plug>AirlineSelectNextTab
 
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline_theme = 'papercolor'
+let g:airline_theme = 'term'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -455,8 +458,8 @@ endif
 
 " unicode symbols
 " タブの区切り文字を指定する
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '◀'
 let g:airline_symbols.crypt = '🔒'
 " let g:airline_symbols.linenr = '␊'
 " let g:airline_symbols.linenr = '␤'
