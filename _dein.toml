@@ -88,6 +88,12 @@ repo = 'pangloss/vim-javascript'
 [[plugins]]
 repo = 'maxmellon/vim-jsx-pretty'
 
+[[plugins]]
+repo = 'elzr/vim-json'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
 # -----------------------------------------
 # カラースキーム
 # -----------------------------------------

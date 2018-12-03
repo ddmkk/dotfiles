@@ -222,7 +222,8 @@ let g:vim_jsx_pretty_colorful_config = 1
 " ★vim-json
 " -------------------------------------------
 " クオテーションを省略しないようにする
-let g:vim_json_syntax_conceal = 0
+set conceallevel=0
+let g:vim_json_syntax_conceal=0
 
 "--------------------------------------------
 " ★vim-indent-guides
