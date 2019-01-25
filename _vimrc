@@ -192,6 +192,7 @@ augroup fileTypeIndent
     autocmd BufNewFile,BufRead *.scss setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.css setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.rb setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.erb setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.html setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.pug setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
@@ -499,4 +500,11 @@ let g:airline_symbols.whitespace = 'Ξ'
 " ビジュアルモードで選択後、"S-"入力で選択範囲をpタグで囲む
 let g:surround_{char2nr("-")} = "<p>\r</p>"
 
-
+"" 補完系（せっかくデフォであるのでいれておく）
+" オムニ補完の設定（insertモードでCtrl+oで候補を出す、Ctrl+n Ctrl+pで選択、Ctrl+yで確定）
+set omnifunc=pythoncomplete#Complete
+set omnifunc=javascriptcomplete#CompleteJS
+set omnifunc=htmlcomplete#CompleteTags
+set omnifunc=csscomplete#CompleteCSS
+set omnifunc=xmlcomplete#CompleteTags
+set omnifunc=phpcomplete#CompletePHP

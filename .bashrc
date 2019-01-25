@@ -3,3 +3,6 @@ alias open=cygstart
 alias e="explorer"
 
 export XDG_CONFIG_HOME=~/.config
+
+# Windows Git Bashでtreeコマンド
+alias tree='tree -N'

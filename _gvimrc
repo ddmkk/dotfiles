@@ -32,8 +32,8 @@ source $VIMRUNTIME/menu.vim
 "--------------------------------------------------------
 "初期ウィンドウサイズの指定
 "ウィンドウの高さ
-set lines=60
-"ウィンドウの高さ
+set lines=40
+"ウィンドウの幅
 set columns=150
 "コマンドラインの高さ
 set cmdheight=2
