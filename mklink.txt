@@ -7,5 +7,5 @@ C:\Windows\system32> mklink %HOMEPATH%\.bashrc %HOMEPATH%\dotfiles\.bashrc
 # 2017.09.12
 C:\Windows\system32> mklink %HOMEPATH%\.vimrc %HOMEPATH%\dotfiles\_vimrc
 C:\Windows\system32> mklink %HOMEPATH%\.gvimrc %HOMEPATH%\dotfiles\_gvimrc
-C:\Windows\system32>mklink %HOMEPATH%\.vim\dein\dein.toml %HOMEPATH%\dotfiles\dein.toml
-C:\Windows\system32>mklink %HOMEPATH%\.vim\dein\dein_lazy.toml %HOMEPATH%\dotfiles\dein_lazy.toml
+C:\Windows\system32> mklink %HOMEPATH%\.vim\dein\dein.toml %HOMEPATH%\dotfiles\dein.toml
+C:\Windows\system32> mklink %HOMEPATH%\.vim\dein\dein_lazy.toml %HOMEPATH%\dotfiles\dein_lazy.toml

@@ -7,6 +7,8 @@ endif
 " let $PATH = $PATH . ';C:\MinGW\bin;C:\MinGW\msys\1.0\bin;'
 let $PATH = $PATH . ';C:\tools\msys64\usr\bin;'
 
+" set runtimepath+=C:\vim\vim81-kaoriya-win64
+
 " ------------------------------------------------
 " dein.vim
 " ------------------------------------------------
@@ -359,7 +361,7 @@ let g:syntastic_php_checkers = ['phpmd']
 let g:syntastic_php_phpcs_args='--tab-width=4'
 " なんでか分からないけど php コマンドのオプションを上書かないと動かなかった
 " let g:syntastic_php_php_args = '-l'
-
+"
 "----------------------------------------------
 " JsLint 設定
 " function! s:javascript_filetype_settings()
@@ -402,6 +404,10 @@ autocmd BufRead,BufNewFile,BufReadPre *.md setfiletype markdown
 
 " eslint
 autocmd BufRead,BufNewFile *.eslintrc setfiletype javascript
+
+" PCSS(Postcss)
+autocmd BufRead,BufNewFile *.pcss setfiletype css
+
 " ------------------------------------------------
 " ★Markdown Preview
 " ------------------------------------------------

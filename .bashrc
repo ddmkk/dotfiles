@@ -6,3 +6,5 @@ export XDG_CONFIG_HOME=~/.config
 
 # Windows Git Bashでtreeコマンド
 alias tree='tree -N'
+
+export PYTHONHOME=c/tools/msys64/mingw64
