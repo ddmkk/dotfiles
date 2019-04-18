@@ -1,12 +1,5 @@
 "Display
-" colorscheme desert
-" colorscheme jellybeans
-" colorscheme molokai
 colorscheme hybrid
-" colorscheme badwolf
-" colorscheme gotham
-" colorscheme landscape
-" colorscheme solarized
 set background=dark
 "-------------------------------------------------------
 let g:molokai_original = 0

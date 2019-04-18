@@ -7,39 +7,46 @@ endif
 " let $PATH = $PATH . ';C:\MinGW\bin;C:\MinGW\msys\1.0\bin;'
 let $PATH = $PATH . ';C:\tools\msys64\usr\bin;'
 
-" set runtimepath+=C:\vim\vim81-kaoriya-win64
+set runtimepath+=~/.vim
+set runtimepath+=C:\vim\vim81-kaoriya-win64
 
+" プラグイン保存path
+set packpath+=~/.vim
+
+" ▼Vim8からプラグインマネージャ機能が追加された為dein削除
 " ------------------------------------------------
 " dein.vim
 " ------------------------------------------------
 " dein自体の自動インストール
-let s:dein_dir = expand('~/.vim/dein')
+" let s:dein_dir = expand('~/.vim/dein')
 
 " dein.vim実体があるディレクトリ
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " dein.vimが存在しなければgithubからcloneする
-if !isdirectory(s:dein_repo_dir)
-    execute "!git clone git@github.com:Shougo/dein.vim.git" s:dein_repo_dir
-endif
+" if !isdirectory(s:dein_repo_dir)
+"    execute "!git clone git@github.com:Shougo/dein.vim.git" s:dein_repo_dir
+" endif
 
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+"set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-let s:toml = s:dein_dir . '/dein.toml'
-let s:toml_lazy = s:dein_dir . '/dein_lazy.toml'
-if dein#load_state(s:dein_dir)
-    call dein#begin(s:dein_dir)
-    call dein#load_toml(s:toml, {'lazy': 0})
-    call dein#load_toml(s:toml_lazy, {'lazy': 1})
-    call dein#end()
-    call dein#save_state()
-endif
+" let s:toml = s:dein_dir . '/dein.toml'
+" let s:toml_lazy = s:dein_dir . '/dein_lazy.toml'
+" if dein#load_state(s:dein_dir)
+"    call dein#begin(s:dein_dir)
+"    call dein#load_toml(s:toml, {'lazy': 0})
+"    call dein#load_toml(s:toml_lazy, {'lazy': 1})
+"    call dein#end()
+"    call dein#save_state()
+" endif
 
-if has('vim_starting') && dein#check_install()
-   call dein#install()
-endif
+" if has('vim_starting') && dein#check_install()
+"   call dein#install()
+" endif
 
-filetype plugin indent on
+filetype off
+filetype plugin indent off
+" filetype plugin indent on
 
 "---------------------------------------------------------------
 "基本
@@ -217,6 +224,17 @@ set showcmd
 " ===========================================
 " ▼プラグイン別設定
 " ===========================================
+
+" -------------------------------------------
+" ★emmet-vim
+" -------------------------------------------
+let g:user_emmet_leader_key='<C-e>'
+let g:user_emmet_settings = {
+\   'variables': {
+\       'lang': "ja"
+\   }
+\ }
+
 " -------------------------------------------
 " ★JSXシンタックス
 let g:vim_jsx_pretty_colorful_config = 1
@@ -330,35 +348,36 @@ let g:vimfiler_readonly_file_icon = "🔒"
 
 "----------------------------------------------
 " ★Syntastic
+" ※ 非同期プラグイン"w0rp/ale"に変更。
 "----------------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 " オープン時にチェック
-let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_open = 1
 " ファイル保存時にチェック
-let g:syntastic_check_on_save = 1
+" let g:syntastic_check_on_save = 1
 " エラー行にサイン表示
-let g:syntastic_enable_signs = 1
+" let g:syntastic_enable_signs = 1
 " location list を常に更新
-let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_always_populate_loc_list = 0
 " location list を常に表示
-let g:syntastic_auto_loc_list = 0
+" let g:syntastic_auto_loc_list = 0
 " :wq で終了するときもチェックする
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {'mode': 'passive',
-                            \ 'active_filetypes': ['php', 'ruby', 'javascript'],
-                            \ 'passive_filetypes': [] }
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_mode_map = {'mode': 'passive',
+"                             \ 'active_filetypes': ['php', 'ruby', 'javascript'],
+"                             \ 'passive_filetypes': [] }
 " javascript
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 
 " php
 " 主に動いているのはPHPCodeSniffer
 " let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-let g:syntastic_php_checkers = ['phpmd']
+" let g:syntastic_php_checkers = ['phpmd']
 " 引数でtab-width=4を指定しないと検証エラーになるので回避するため設定
-let g:syntastic_php_phpcs_args='--tab-width=4'
+" let g:syntastic_php_phpcs_args='--tab-width=4'
 " なんでか分からないけど php コマンドのオプションを上書かないと動かなかった
 " let g:syntastic_php_php_args = '-l'
 "
@@ -394,19 +413,25 @@ function! s:DetectEjs()
         set filetype=ejs
     endif
 endfunction
-
 autocmd BufNewFile,BufRead * call s:DetectEjs()
 
 " ECMAScript2015(ES6)のシンタックス設定
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile,BufReadPre *.pug setfiletype pug
 autocmd BufRead,BufNewFile,BufReadPre *.md setfiletype markdown
-
 " eslint
 autocmd BufRead,BufNewFile *.eslintrc setfiletype javascript
-
 " PCSS(Postcss)
 autocmd BufRead,BufNewFile *.pcss setfiletype css
+" toml ※遅延読込テスト
+autocmd BufNewFile,BufRead *.toml set filetype=toml
+function! s:config_toml()
+    packadd vim-toml
+endfunction
+augroup lazyLoad
+    autocmd!
+    autocmd FileType toml call s:config_toml()
+augroup END
 
 " ------------------------------------------------
 " ★Markdown Preview
@@ -501,7 +526,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 " let g:airline_symbols.linenr = '⭡'
 
 " ------------------------------------
-" Surround.vim
+" ★Surround.vim
 " ------------------------------------
 " ビジュアルモードで選択後、"S-"入力で選択範囲をpタグで囲む
 let g:surround_{char2nr("-")} = "<p>\r</p>"
@@ -514,3 +539,72 @@ set omnifunc=htmlcomplete#CompleteTags
 set omnifunc=csscomplete#CompleteCSS
 set omnifunc=xmlcomplete#CompleteTags
 set omnifunc=phpcomplete#CompletePHP
+
+" -------------------------------------
+" ★neocomplete.vim
+" -------------------------------------
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 1
+" 起動時に有効化
+let g:neocomplete#enable_at_startup = 1
+" Use SmartCase
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#skip_auto_completion_time = ''
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions',
+    \ 'php' : $HOME.'/.vim/dict/php.dict',
+    \ 'js' : $HOME.'/.vim/dict/js.dict',
+    \ 'ruby' : $HOME.'/.vim/dict/ruby.dict'
+    \ }
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+let g:neocomplete#keyword_patterns['perl'] = '\h\w*->\h\w*\|\h\w*::\w*'
+let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
+
+" -------------------------------------
+" ★deoplete.vim
+" XXX 動かなかった…
+" -------------------------------------
+" let g:python3_host_prog='C:\Python37/python.exe'
+" let g:deoplete#enable_at_startup=1
+" let g:deoplete#auto_complete_delay=0
+" let g:deoplete#auto_complete_start_length=1
+" function! s:deoplete_enabled()
+"     packadd deoplete.nvim
+"     let g:python3_host_prog='C:\Python37/python.exe'
+"     let g:deoplete#enable_at_startup=1
+" endfunction
+" augroup lazyLoad
+"     autocmd!
+"     autocmd InsertEnter call s:deoplete_enabled()
+" augroup END
+
+" -------------------------------------
+" ale 非同期Lint
+" -------------------------------------
+" 保存時のみ実行
+let g:ale_lint_on_text_changed = 0
+" 表示に関する設定
+let g:ale_sign_error = '×'
+let g:ale_sign_warning = '⚡'
+let g:ale_echo_msg_format = '[%linter%]%code: %%s'
+let g:airline#extensions#ale#open_lnum_symbol = '('
+let g:airline#extensions#ale#close_lnum_symbol = ')'
+highlight link ALEErrorSign Tag
+highlight link ALEWarningSign StorageClass
+" Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" -------------------------------------
+
+filetype plugin indent on
