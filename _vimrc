@@ -11,7 +11,7 @@ set runtimepath+=~/.vim
 set runtimepath+=C:\vim\vim81-kaoriya-win64
 
 " プラグイン保存path
-set packpath+=~/.vim
+" set packpath+=~/.vim
 
 " ==============================================================
 " dein.vim

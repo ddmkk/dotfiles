@@ -1,3 +1,6 @@
+[[plugins]] # コード非同期チェック
+repo = 'w0rp/ale'
+
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 on_i = 1 # インサートモードに入ったら起動

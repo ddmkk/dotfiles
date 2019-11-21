@@ -43,10 +43,6 @@ repo = 'AndrewRadev/linediff.vim'
 # [[plugins]] # コードチェック
 # repo = 'scrooloose/syntastic'
 
-# FIXME うまく動かないのでコメントアウト
-# [[plugins]] # コード非同期チェック
-# repo = 'dense-analysis/ale'
-
 # ※うまく動かないのでコメントアウト
 # [[plugins]] # .eslintrcをプロジェクト毎変更可能に
 # repo = 'mtscout6/syntastic-local-eslint.vim'
@@ -77,8 +73,8 @@ repo = 'ryanoasis/vim-devicons'
 # Git関連
 # -----------------------------------------
 
-# [[plugins]] # vim用gitラッパープラグイン
-# repo ='tpope/vim-fugitive'
+[[plugins]] # vim用gitラッパープラグイン
+repo ='tpope/vim-fugitive'
 
 [[plugins]] # git の変更箇所をマーク
 repo = 'airblade/vim-gitgutter'
