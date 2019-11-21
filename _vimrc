@@ -27,10 +27,6 @@ if dein#load_state('~/.cache/dein')
     " Required:
     call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-    " Add or remove your plugins here like this:
-    " call dein#add('Shougo/neosnippet.vim')
-    " call dein#add('Shougo/neosnippet-snippets')
-
     let s:toml = '~/.cache/dein/dein.toml'
     let s:toml_lazy = '~/.cache/dein/dein_lazy.toml'
     call dein#load_toml(s:toml, {'lazy': 0})
@@ -629,3 +625,8 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " -------------------------------------
 
 filetype plugin indent on
+
+" -------------------------------------
+" vim-go
+" -------------------------------------
+let g:go_version_warning=0

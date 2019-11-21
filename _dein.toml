@@ -9,7 +9,7 @@ repo = 'Shougo/unite.vim'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
-build = 'make'
+# build = 'make'
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
@@ -24,8 +24,8 @@ repo = 'thinca/vim-quickrun'
 [[plugins]] # コメント
 repo = 'tomtom/tcomment_vim'
 
-[[plugins]] # インデントに色を付けて見やすくする
-repo = 'nathanaelkane/vim-indent-guides'
+# [[plugins]] # インデントに色を付けて見やすくする
+# repo = 'nathanaelkane/vim-indent-guides'
 
 [[plugins]] # シングル・ダブルクウォートの入れ替えなど
 repo = 'tpope/vim-surround'
@@ -43,20 +43,21 @@ repo = 'AndrewRadev/linediff.vim'
 # [[plugins]] # コードチェック
 # repo = 'scrooloose/syntastic'
 
+# FIXME うまく動かないのでコメントアウト
+# [[plugins]] # コード非同期チェック
+# repo = 'dense-analysis/ale'
+
 # ※うまく動かないのでコメントアウト
 # [[plugins]] # .eslintrcをプロジェクト毎変更可能に
 # repo = 'mtscout6/syntastic-local-eslint.vim'
 
-# Linter
-[[plugins]]
-repo = 'w0rp/ale'
 
 [[plugins]] # editorconfig
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
-depends = ['/vim-airline-themes']
+depends = ['vim-airline-themes']
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
@@ -76,8 +77,8 @@ repo = 'ryanoasis/vim-devicons'
 # Git関連
 # -----------------------------------------
 
-[[plugins]] # vim用gitラッパープラグイン
-repo ='tpope/vim-fugitive'
+# [[plugins]] # vim用gitラッパープラグイン
+# repo ='tpope/vim-fugitive'
 
 [[plugins]] # git の変更箇所をマーク
 repo = 'airblade/vim-gitgutter'
@@ -157,3 +158,9 @@ repo = 'kannokanno/previm'
 [[plugins]]
 repo = 'tyru/open-browser.vim'
 
+
+# -----------------------------------------------------
+# GO
+# -----------------------------------------------------
+[[plugins]]
+repo = 'fatih/vim-go'
