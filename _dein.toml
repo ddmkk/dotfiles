@@ -40,12 +40,16 @@ repo = 'junegunn/vim-easy-align'
 [[plugins]] # 任意の２か所のdiffをマークする
 repo = 'AndrewRadev/linediff.vim'
 
-[[plugins]] # コードチェック
-repo = 'scrooloose/syntastic'
+# [[plugins]] # コードチェック
+# repo = 'scrooloose/syntastic'
 
 # ※うまく動かないのでコメントアウト
-[[plugins]] # .eslintrcをプロジェクト毎変更可能に
-repo = 'mtscout6/syntastic-local-eslint.vim'
+# [[plugins]] # .eslintrcをプロジェクト毎変更可能に
+# repo = 'mtscout6/syntastic-local-eslint.vim'
+
+# Linter
+[[plugins]]
+repo = 'w0rp/ale'
 
 [[plugins]] # editorconfig
 repo = 'editorconfig/editorconfig-vim'

@@ -13,39 +13,50 @@ set runtimepath+=C:\vim\vim81-kaoriya-win64
 " プラグイン保存path
 set packpath+=~/.vim
 
-" ▼Vim8からプラグインマネージャ機能が追加された為dein削除
-" ------------------------------------------------
+" ==============================================================
 " dein.vim
-" ------------------------------------------------
-" dein自体の自動インストール
-" let s:dein_dir = expand('~/.vim/dein')
+" ==============================================================
+" Required:
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" dein.vim実体があるディレクトリ
-" let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" Required:
+if dein#load_state('~/.cache/dein')
+    call dein#begin('~/.cache/dein')
 
-" dein.vimが存在しなければgithubからcloneする
-" if !isdirectory(s:dein_repo_dir)
-"   execute "!git clone git@github.com:Shougo/dein.vim.git" s:dein_repo_dir
-" endif
+    " Let dein manage dein
+    " Required:
+    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-" set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+    " Add or remove your plugins here like this:
+    " call dein#add('Shougo/neosnippet.vim')
+    " call dein#add('Shougo/neosnippet-snippets')
 
-" let s:toml = s:dein_dir . '/dein.toml'
-" let s:toml_lazy = s:dein_dir . '/dein_lazy.toml'
-" if dein#load_state(s:dein_dir)
-"   call dein#begin(s:dein_dir)
-"   call dein#load_toml(s:toml, {'lazy': 0})
-"   call dein#load_toml(s:toml_lazy, {'lazy': 1})
-"   call dein#end()
-"   call dein#save_state()
-" endif
+    let s:toml = '~/.cache/dein/dein.toml'
+    let s:toml_lazy = '~/.cache/dein/dein_lazy.toml'
+    call dein#load_toml(s:toml, {'lazy': 0})
+    call dein#load_toml(s:toml_lazy, {'lazy': 1})
 
-" if has('vim_starting') && dein#check_install()
-"   call dein#install()
-" endif
+    " Required:
+    call dein#end()
+    call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+    call dein#install()
+endif
+
+" アンインストール用
+call map(dein#check_clean(), "delete(v:val, 'rf')")
+
+" =============================================================
 
 filetype off
-filetype plugin indent off
+" filetype plugin indent off
 " filetype plugin indent on
 
 "---------------------------------------------------------------
@@ -190,8 +201,8 @@ nnoremap <F7> :<C-u>source $MYVIMRC<CR>
             \ :source $MYGVIMRC<CR>
 
 " dein.tomlを一瞬で開く
-nnoremap <F8> :<C-u>edit ~/.vim/dein/dein.toml<CR>
-nnoremap <F9> :<C-u>edit ~/.vim/dein/dein_lazy.toml<CR>
+nnoremap <F8> :<C-u>edit ~/.cache/dein/dein.toml<CR>
+nnoremap <F9> :<C-u>edit ~/.cache/dein/dein_lazy.toml<CR>
 
 " .vimrcを更新したら自動で反映させる
 " augroup AutoloadVimrc

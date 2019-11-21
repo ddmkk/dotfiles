@@ -9,3 +9,7 @@ C:\Windows\system32> mklink %HOMEPATH%\.vimrc %HOMEPATH%\dotfiles\_vimrc
 C:\Windows\system32> mklink %HOMEPATH%\.gvimrc %HOMEPATH%\dotfiles\_gvimrc
 C:\Windows\system32> mklink %HOMEPATH%\.vim\dein\dein.toml %HOMEPATH%\dotfiles\dein.toml
 C:\Windows\system32> mklink %HOMEPATH%\.vim\dein\dein_lazy.toml %HOMEPATH%\dotfiles\dein_lazy.toml
+
+# 2019.11.21
+C:\Windows\system32> mklink %HOMEPATH%\.cache\dein\dein.toml %HOMEPATH%\dotfiles\dein.toml
+C:\Windows\system32> mklink %HOMEPATH%\.cache\dein\dein_lazy.toml %HOMEPATH%\dotfiles\dein_lazy.toml
