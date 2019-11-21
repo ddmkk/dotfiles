@@ -25,19 +25,19 @@ set packpath+=~/.vim
 
 " dein.vimが存在しなければgithubからcloneする
 " if !isdirectory(s:dein_repo_dir)
-"    execute "!git clone git@github.com:Shougo/dein.vim.git" s:dein_repo_dir
+"   execute "!git clone git@github.com:Shougo/dein.vim.git" s:dein_repo_dir
 " endif
 
-"set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+" set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " let s:toml = s:dein_dir . '/dein.toml'
 " let s:toml_lazy = s:dein_dir . '/dein_lazy.toml'
 " if dein#load_state(s:dein_dir)
-"    call dein#begin(s:dein_dir)
-"    call dein#load_toml(s:toml, {'lazy': 0})
-"    call dein#load_toml(s:toml_lazy, {'lazy': 1})
-"    call dein#end()
-"    call dein#save_state()
+"   call dein#begin(s:dein_dir)
+"   call dein#load_toml(s:toml, {'lazy': 0})
+"   call dein#load_toml(s:toml_lazy, {'lazy': 1})
+"   call dein#end()
+"   call dein#save_state()
 " endif
 
 " if has('vim_starting') && dein#check_install()
@@ -53,8 +53,12 @@ filetype plugin indent off
 "---------------------------------------------------------------
 "文字コードをUTF-8にする
 set encoding=UTF-8
-set fileencoding=UTF-8
+" set fileencoding=UTF-8
 set termencoding=UTF-8
+" 自動判別機能追加
+" set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+" 改行コードの自動認識
+set fileformats=unix,dos,mac
 "ファイル変更中でも他のファイルを開けるようにする
 set hidden
 "ファイル内容が変更されると自動読み込みする
@@ -86,7 +90,8 @@ set tabstop=4
 "<Tab>の代わりに<Space>を挿入する
 set expandtab
 "expandtabで<Tab>が対応する<Space>の数
-set softtabstop=4
+"キーボードでTabキーを押したときに挿入される空白の量。0の場合はtabstopの値を引き継ぐ
+set softtabstop=0
 set backspace=indent,eol,start
 "カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
@@ -421,6 +426,9 @@ autocmd BufRead,BufNewFile,BufReadPre *.pug setfiletype pug
 autocmd BufRead,BufNewFile,BufReadPre *.md setfiletype markdown
 " eslint
 autocmd BufRead,BufNewFile *.eslintrc setfiletype javascript
+" vue
+autocmd BufRead,BufNewFile *.vue setfiletype vue
+" autocmd FileType vue syntax sync fromstart
 " PCSS(Postcss)
 autocmd BufRead,BufNewFile *.pcss setfiletype css
 " toml ※遅延読込テスト
@@ -593,7 +601,9 @@ let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnu
 " ale 非同期Lint
 " -------------------------------------
 " 保存時のみ実行
+let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
+let g:ale_linters = { 'javascript': ['eslint'] }
 " 表示に関する設定
 let g:ale_sign_error = '×'
 let g:ale_sign_warning = '⚡'
