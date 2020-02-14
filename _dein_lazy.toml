@@ -1,40 +1,40 @@
 [[plugins]] # コード非同期チェック
 repo = 'w0rp/ale'
 
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-on_i = 1 # インサートモードに入ったら起動
-hook_source = '''
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" 起動時に有効化
-let g:neocomplete#enable_at_startup = 1
-" Use SmartCase
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#auto_completion_start_length = 2
-let g:neocomplete#skip_auto_completion_time = ''
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions',
-    \ 'php' : $HOME.'/.vim/dict/php.dict',
-    \ 'js' : $HOME.'/.vim/dict/js.dict',
-    \ 'ruby' : $HOME.'/.vim/dict/ruby.dict'
-    \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-let g:neocomplete#keyword_patterns['perl'] = '\h\w*->\h\w*\|\h\w*::\w*'
-let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
-'''
+# [[plugins]]
+# repo = 'Shougo/neocomplete.vim'
+# on_i = 1 # インサートモードに入ったら起動
+# hook_source = '''
+# " Disable AutoComplPop.
+# let g:acp_enableAtStartup = 0
+# " 起動時に有効化
+# let g:neocomplete#enable_at_startup = 1
+# " Use SmartCase
+# let g:neocomplete#enable_smart_case = 1
+# " Set minimum syntax keyword length.
+# let g:neocomplete#sources#syntax#min_keyword_length = 2
+# let g:neocomplete#auto_completion_start_length = 2
+# let g:neocomplete#skip_auto_completion_time = ''
+# let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+#
+# " Define dictionary.
+# let g:neocomplete#sources#dictionary#dictionaries = {
+#     \ 'default' : '',
+#     \ 'vimshell' : $HOME.'/.vimshell_hist',
+#     \ 'scheme' : $HOME.'/.gosh_completions',
+#     \ 'php' : $HOME.'/.vim/dict/php.dict',
+#     \ 'js' : $HOME.'/.vim/dict/js.dict',
+#     \ 'ruby' : $HOME.'/.vim/dict/ruby.dict'
+#     \ }
+#
+# " Define keyword.
+# if !exists('g:neocomplete#keyword_patterns')
+#   let g:neocomplete#keyword_patterns = {}
+# endif
+# let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+# let g:neocomplete#keyword_patterns['perl'] = '\h\w*->\h\w*\|\h\w*::\w*'
+# let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
+# '''
 
 # スニペット
 [[plugins]]
@@ -123,4 +123,8 @@ on_ft = 'twig'
 [[plugins]] # pug
 repo = 'digitaltoad/vim-pug'
 on_ft = 'pug'
+
+[[plugins]] # vue
+repo = 'posva/vim-vue'
+on_ft = 'vue'
 
