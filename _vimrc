@@ -11,43 +11,43 @@ set runtimepath+=~/.vim
 set runtimepath+=C:\vim\vim81-kaoriya-win64
 
 " プラグイン保存path
-" set packpath+=~/.vim
+set packpath+=~/.vim
 
 " ==============================================================
 " dein.vim
 " ==============================================================
 " Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+" set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" Required:
-if dein#load_state('~/.cache/dein')
-    call dein#begin('~/.cache/dein')
-
-    " Let dein manage dein
-    " Required:
-    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-    let s:toml = '~/.cache/dein/dein.toml'
-    let s:toml_lazy = '~/.cache/dein/dein_lazy.toml'
-    call dein#load_toml(s:toml, {'lazy': 0})
-    call dein#load_toml(s:toml_lazy, {'lazy': 1})
-
-    " Required:
-    call dein#end()
-    call dein#save_state()
-endif
-
-" Required:
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-    call dein#install()
-endif
-
-" アンインストール用
-call map(dein#check_clean(), "delete(v:val, 'rf')")
+" " Required:
+" if dein#load_state('~/.cache/dein')
+"     call dein#begin('~/.cache/dein')
+"
+"     " Let dein manage dein
+"     " Required:
+"     call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+"
+"     let s:toml = '~/.cache/dein/dein.toml'
+"     let s:toml_lazy = '~/.cache/dein/dein_lazy.toml'
+"     call dein#load_toml(s:toml, {'lazy': 0})
+"     call dein#load_toml(s:toml_lazy, {'lazy': 1})
+"
+"     " Required:
+"     call dein#end()
+"     call dein#save_state()
+" endif
+"
+" " Required:
+" filetype plugin indent on
+" syntax enable
+"
+" " If you want to install not installed plugins on startup.
+" if dein#check_install()
+"     call dein#install()
+" endif
+"
+" " アンインストール用
+" call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 " =============================================================
 
@@ -457,6 +457,8 @@ nnoremap [previm] <Nop>
 nmap <Space>p [previm]
 nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
 nnoremap <silent> [previm]r :call previm#refresh()<CR>et g:previm_open_cmd = 'open -a chrome'
+let g:vim_markdown_folding_disabled=1
+let g:previm_enable_realtime=1
 
 " ------------------------------------------------
 " ★open-browser.vim
