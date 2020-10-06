@@ -12,10 +12,7 @@ set ruler    "座標を表示する
 set showmatch   "閉じ括弧の入力時に対応する括弧を表示する
 set matchtime=3 "showmatchの表示時間
 set laststatus=2    "ステータスラインを常に表示する
-" set guifont=Migu\ 1M:h11:cSHIFTJIS "フォント設定
-set guifont=Migu1M:h11:cSHIFTJIS "フォント設定
-" set guifont=Ricty\ Diminished\ for\ Powerline:h12:cSHIFTJIS "フォント設定
-" set guifont=*
+set guifont=Migu1M:h11:cSHIFTJIS
 set textwidth=0
 "--------------------------------------------------------
 "メニューの文字化け回避

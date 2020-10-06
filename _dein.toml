@@ -1,35 +1,71 @@
+###############
+# Dein
+###############
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+###############
+# Denite
+###############
 [[plugins]]
-repo = 'Shougo/vimfiler.vim'
+repo = 'Shougo/denite.nvim'
+# hook_add = '''
+# source ~/.config/nvim/plugins/denite.rc.vim
+# '''
+
+################
+# Defx
+################
+[[plugins]]
+repo ="kristijanhusak/defx-git"
+hook_add = '''
+call defx#custom#column('git', 'indicators', {
+  \ 'Modified'  : '✹',
+  \ 'Staged'    : '✚',
+  \ 'Untracked' : '✭',
+  \ 'Renamed'   : '➜',
+  \ 'Unmerged'  : '═',
+  \ 'Ignored'   : '☒',
+  \ 'Deleted'   : '✖',
+  \ 'Unknown'   : '?'
+  \ })
+'''
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
+repo ="kristijanhusak/defx-icons"
 
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-# build = 'make'
+# [[plugins]] # vimfiler代替
+# repo = 'Shougo/defx.nvim'
+# depends = ['defx-git', 'defx-icons']
+# hook_add = '''
+# source ~/.config/nvim/plugins/defx.rc.vim
+# '''
 
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-on_source = ['unite.vim']
+################
+# Deol ※NeoVim上でターミナルを実行できる
+################
 
-[[plugins]]
-repo = 'Shougo/vimshell.vim'
-
-[[plugins]]
-repo = 'thinca/vim-quickrun'
+# [[plugins]]
+# repo = "shougo/deol.nvim"
+# hook_add = """
+# source ~/.config/nvim/plugins/deol.rc.vim
+# """
 
 [[plugins]] # コメント
 repo = 'tomtom/tcomment_vim'
 
-# [[plugins]] # インデントに色を付けて見やすくする
-# repo = 'nathanaelkane/vim-indent-guides'
+[[plugins]] # インデントに色を付けて見やすくする
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_enable_on_vim_startup = 1
+'''
 
 [[plugins]] # シングル・ダブルクウォートの入れ替えなど
 repo = 'tpope/vim-surround'
-
+hook_add = '''
+" ビジュアルモードで選択後、"S-"入力で選択範囲をpタグで囲む
+let g:surround_{char2nr("-")} = "<p>\r</p>"
+'''
 
 [[plugins]] # Agコマンドで検索を高速にする
 repo = 'rking/ag.vim'
@@ -52,22 +88,84 @@ repo = 'AndrewRadev/linediff.vim'
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
-repo = 'vim-airline/vim-airline'
-depends = ['vim-airline-themes']
+repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
-repo = 'ryanoasis/vim-devicons'
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+  set laststatus=2
+  " Powerline系フォントを利用する
+  let g:airline_powerline_fonts = 1
+  " theme
+  let g:airline_theme = 'cool'
+  " タブを有効化する
+  let g:airline#extensions#tabline#enabled = 1
+  " タブに番号を表示する
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
+  " タブの切替キーバインド
+  nmap <C-left> <Plug>AirlineSelectPrevTab
+  nmap <C-right> <Plug>AirlineSelectNextTab
+
+  let g:airline#extensions#whitespace#mixed_indent_algo = 1
+
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+
+  " unicode symbols
+  " タブの区切り文字を指定する
+  " let g:airline_left_sep = '▶'
+  " let g:airline_right_sep = '◀'
+  let g:airline_symbols.crypt = '🔒'
+  " let g:airline_symbols.linenr = '␊'
+  " let g:airline_symbols.linenr = '␤'
+  let g:airline_symbols.linenr = '¶'
+  let g:airline_symbols.maxlinenr = '☰'
+  " let g:airline_symbols.maxlinenr = ''
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'ρ'
+  " let g:airline_symbols.paste = 'Þ'
+  " let g:airline_symbols.paste = '∥'
+  let g:airline_symbols.spell = 'Ꞩ'
+  let g:airline_symbols.notexists = '∄'
+  let g:airline_symbols.whitespace = 'Ξ'
+'''
 
 # [[plugins]] # ステータスラインの色付け（※air-lineより軽いのでこちらに変更）
 # repo = 'itchyny/lightline.vim'
 # hook_add = '''
-#     let g:lightline = {
-#     \ 'colorscheme': 'wombat',
-#     \ }
+# let g:lightline = {
+# \ 'colorscheme': 'wombat',
+# \ }
 # '''
+
+[[plugins]] # カーソル位置のコンテキストのfiletypeを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+ hook_add = '''
+" カーソル移動時の自動切り替えを無効化
+" このオプションは filetype ごとに設定可能
+" "*" は全ての filetype に影響する
+let g:precious_enable_switch_CursorMoved = {
+\   "*" : 0
+\}
+let g:precious_enable_switch_CursorMoved_i = {
+\   "*" : 0
+\}
+
+" insert に入った時にスイッチし、抜けた時に元に戻す
+augroup test
+   autocmd!
+   autocmd InsertEnter * :PreciousSwitch
+   autocmd InsertLeave * :PreciousReset
+augroup END
+'''
 
 # -----------------------------------------
 # Git関連
@@ -76,7 +174,7 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]] # vim用gitラッパープラグイン
 repo ='tpope/vim-fugitive'
 
-[[plugins]] # git の変更箇所をマーク
+# [[plugins]] # git の変更箇所を左側にマーク
 repo = 'airblade/vim-gitgutter'
 
 # -----------------------------------------
@@ -85,61 +183,80 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'pangloss/vim-javascript'
+on_ft= ['javascript', 'javascript.jsx']
 
 [[plugins]]
 repo = 'maxmellon/vim-jsx-pretty'
+on_ft= ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'alampros/vim-styled-jsx'
+on_ft= ['javascript', 'javascript.jsx']
 
 [[plugins]]
 repo = 'elzr/vim-json'
+hook_add = '''
+" ダブルクオテーション省略機能無効化
+let g:vim_json_syntax_conceal = 0
+'''
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
+on_ft= ['typescript', 'typescript.tsx']
+
+[[plugins]] # TOMLシンタックス
+repo = 'cespare/vim-toml'
+
+[[plugins]] # HTML5
+repo = 'othree/html5.vim'
+
+[[plugins]] # CSS3
+repo = 'hail2u/vim-css3-syntax'
+
+[[plugins]] # ES6
+repo = 'othree/yajs.vim'
+
+[[plugins]] # ejs
+repo = 'nikvdp/ejs-syntax'
+
+[[plugins]] # Smarty
+repo = 'vim-scripts/smarty-syntax'
+
+[[plugins]] # twig
+repo = 'beyondwords/vim-twig'
+
+[[plugins]] # pug
+repo = 'digitaltoad/vim-pug'
+
+[[plugins]] # vue
+repo = 'posva/vim-vue'
 
 # -----------------------------------------
 # カラースキーム
 # -----------------------------------------
+[[plugins]]
+repo = 'haishanh/night-owl.vim'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'sjl/badwolf'
-# hook_source = '''
-# set background=dark
-# au MyAutoCmd VimEnter * nested colorscheme badwolf
-# '''
 
 [[plugins]]
 repo = 'tomasr/molokai'
-# hook_add = '''
-#     set background=dark
-#     au MyAutoCmd VimEnter * nested colorscheme molokai
-# '''
 
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
-# hook_add = '''
-#    set background=dark
-#    au MyAutoCmd VimEnter * nested colorscheme hybrid
-# '''
 
 [[plugins]]
 repo = 'whatyouhide/vim-gotham'
-# hook_add = '''
-#     set background=dark
-#     au MyAutoCmd VimEnter * nested colorscheme hybrid
-# '''
 
 [[plugins]]
 repo = 'itchyny/landscape.vim'
-# hook_add = '''
-#     set background=dark
-#     au MyAutoCmd VimEnter * nested colorscheme hybrid
-# '''
 
 [[plugins]]
 repo = 'altercation/vim-colors-solarized'
-# hook_add = '''
-#     set background=dark
-#     au MyAutoCmd VimEnter * nested colorscheme hybrid
-# '''
 
 # ----------------------------------------------------
 # Markdown関連
@@ -150,10 +267,14 @@ repo = 'plasticboy/vim-markdown'
 
 [[plugins]]
 repo = 'kannokanno/previm'
-
+hook_add = '''
+  autocmd BufRead,BufNewFile *.md  set filetype=markdown
+  nnoremap <silent> <Leader>po :PrevimOpen<CR>
+  let g:vim_markdown_folding_disabled=1
+  let g:previm_enable_realtime=1
+'''
 [[plugins]]
 repo = 'tyru/open-browser.vim'
-
 
 # -----------------------------------------------------
 # GO

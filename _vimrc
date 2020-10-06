@@ -90,6 +90,7 @@ set smartcase
 "検索をファイルの先頭へループする
 set wrapscan
 set autoindent
+set smartindent
 "行頭での<Tab>の幅
 set shiftwidth=4
 "行頭以外での<Tab>の幅
@@ -124,7 +125,7 @@ set noautochdir
 "カーソル行の背景色を変更
 set cursorline
 " 長すぎるシンタックスのカラーリングOFF
-" set synmaxcol=200
+set synmaxcol=200
 " 折り返し時に表示単位での移動をできるようにする
 nnoremap j gj
 nnoremap k gk
@@ -201,11 +202,11 @@ nnoremap <F8> :<C-u>edit ~/.cache/dein/dein.toml<CR>
 nnoremap <F9> :<C-u>edit ~/.cache/dein/dein_lazy.toml<CR>
 
 " .vimrcを更新したら自動で反映させる
-" augroup AutoloadVimrc
-"     autocmd!
-"     autocmd BufWritePost *.vimrc source $MYVIMRC | set foldmethod=marker
-"     autocmd BufWritePost *.gvimrc if has('gui_running') source $MYGVIMRC
-" augroup END
+augroup AutoloadVimrc
+    autocmd!
+    autocmd BufWritePost *.vimrc source $MYVIMRC | set foldmethod=marker
+    autocmd BufWritePost *.gvimrc if has('gui_running') source $MYGVIMRC
+augroup END
 
 " ファイルの種類別インデント設定
 augroup fileTypeIndent
@@ -244,6 +245,9 @@ let g:user_emmet_leader_key='<C-e>'
 let g:user_emmet_settings = {
 \   'variables': {
 \       'lang': "ja"
+\   },
+\   'html': {
+\       'comment_type': 'lastonly'
 \   }
 \ }
 
@@ -626,7 +630,7 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " -------------------------------------
 
-filetype plugin indent on
+filetype plugin indent off
 
 " -------------------------------------
 " vim-go
