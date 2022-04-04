@@ -1,44 +1,56 @@
-# コード非同期チェック
-[[plugins]]
-repo = 'w0rp/ale'
-
 # Deoplete コード補完
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-# hook_add = '''
-#   source ~/.config/nvim/plugins/deoplete.rc.vim
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# hook_source = '''
+# let g:deoplete#enable_at_startup = 1
+# inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+#     \ neosnippet#expandable_or_jumpable() ?
+#     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 # '''
+# hook_add = '''
+# source ~/.config/nvim/plugins/deoplete.rc.vim
+# '''
+# on_i = 1
 # on_event = 'InsertEnter'
 
-[[plugins]]
+[[plugins]] # Vimスクリプト用補完候補
+repo = 'Shougo/neco-vim'
+
+[[plugins]] # 各filetypeのシンタックスファイルの中の記述を見て補完候補を表示する
 repo = 'Shougo/neco-syntax'
-# on_event = 'InsertEnter'
 
 [[plugins]]
-repo = 'Shougo/neosnippet'
+repo = 'Shougo/neosnippet.vim'
 hook_add = '''
   imap <C-k> <Plug>(neosnippet_expand_or_jump)
   smap <C-k> <Plug>(neosnippet_expand_or_jump)
   xmap <C-k> <Plug>(neosnippet_expand_target)
   if has('conceal')
-    set conceallevel=0 concealcursor=niv
+     set conceallevel=2 concealcursor=niv
   endif
 '''
-# on_event = 'InsertEnter'
+# on_i = 1
+on_event = 'InsertEnter'
+on_ft = 'snippet'
 depends = ['neosnippet-snippets']
 
-[[plugins]]
+[[plugins]] #snippet
 repo= 'Shougo/neosnippet-snippets'
+
 
 # Emmet
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_i = 1
 hook_add = '''
 let g:user_emmet_leader_key='<C-e>'
 let g:user_emmet_settings = {
 \   'variables': {
-\       'lang': "ja"
+\       'lang': 'ja'
+\   },
+\   'html': {
+\       'comment_type': 'lastonly'
 \   }
 \ }
 '''
+# on_i = 1
+on_event = 'InsertEnter'

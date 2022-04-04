@@ -13,3 +13,6 @@ C:\Windows\system32> mklink %HOMEPATH%\.vim\dein\dein_lazy.toml %HOMEPATH%\dotfi
 # 2019.11.21
 C:\Windows\system32> mklink %HOMEPATH%\.cache\dein\dein.toml %HOMEPATH%\dotfiles\dein.toml
 C:\Windows\system32> mklink %HOMEPATH%\.cache\dein\dein_lazy.toml %HOMEPATH%\dotfiles\dein_lazy.toml
+
+# 2021.07.07
+C:\Windows\system32> mklink %HOMEPATH%\.eslintrc %HOMEPATH%\dotfiles\.eslintrc

@@ -1,21 +1,23 @@
-###############
-# Dein
-###############
-[[plugins]]
-repo = 'Shougo/dein.vim'
-
-###############
+# -------------------
 # Denite
-###############
+# -------------------
+
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-# hook_add = '''
-# source ~/.config/nvim/plugins/denite.rc.vim
-# '''
+hook_add = '''
+source ~/.config/nvim/plugins/denite.rc.vim
+'''
 
-################
+# -------------------
 # Defx
-################
+# -------------------
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+depends = ['defx-git', 'defx-icons']
+hook_add = '''
+source ~/.config/nvim/plugins/defx.rc.vim
+'''
+
 [[plugins]]
 repo ="kristijanhusak/defx-git"
 hook_add = '''
@@ -34,22 +36,26 @@ call defx#custom#column('git', 'indicators', {
 [[plugins]]
 repo ="kristijanhusak/defx-icons"
 
-# [[plugins]] # vimfiler代替
-# repo = 'Shougo/defx.nvim'
-# depends = ['defx-git', 'defx-icons']
+# -------------------
+# ▲Defx
+# -------------------
+
+[[plugins]] # コード非同期チェック
+repo = 'dense-analysis/ale'
+hook_add = '''
+let g:ale_sign_column_always = 1
+" let g:ale_fixers = {
+" \   'javascript': ['prettier']
+" \}
+" let g:ale_fix_on_save = 1
+'''
 # hook_add = '''
-# source ~/.config/nvim/plugins/defx.rc.vim
+# let g:ale_lint_on_enter = 1
+# let g:ale_lint_on_save = 1
+# let g:ale_linters = {
+# \    'javascript': ['eslint']
+# \}
 # '''
-
-################
-# Deol ※NeoVim上でターミナルを実行できる
-################
-
-# [[plugins]]
-# repo = "shougo/deol.nvim"
-# hook_add = """
-# source ~/.config/nvim/plugins/deol.rc.vim
-# """
 
 [[plugins]] # コメント
 repo = 'tomtom/tcomment_vim'
@@ -60,18 +66,8 @@ hook_add = '''
 let g:indent_guides_enable_on_vim_startup = 1
 '''
 
-[[plugins]] # シングル・ダブルクウォートの入れ替えなど
-repo = 'tpope/vim-surround'
-hook_add = '''
-" ビジュアルモードで選択後、"S-"入力で選択範囲をpタグで囲む
-let g:surround_{char2nr("-")} = "<p>\r</p>"
-'''
-
 [[plugins]] # Agコマンドで検索を高速にする
 repo = 'rking/ag.vim'
-
-[[plugins]] # テキスト揃えを簡単に実現する
-repo = 'junegunn/vim-easy-align'
 
 [[plugins]] # 任意の２か所のdiffをマークする
 repo = 'AndrewRadev/linediff.vim'
@@ -87,51 +83,44 @@ repo = 'AndrewRadev/linediff.vim'
 [[plugins]] # editorconfig
 repo = 'editorconfig/editorconfig-vim'
 
-[[plugins]]
+[[plugins]] # vim-airlineでアイコン表示に必要
 repo = 'ryanoasis/vim-devicons'
 
-[[plugins]]
+[[plugins]] # vim-airlineのテーマ
 repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
-  set laststatus=2
-  " Powerline系フォントを利用する
-  let g:airline_powerline_fonts = 1
-  " theme
-  let g:airline_theme = 'cool'
-  " タブを有効化する
-  let g:airline#extensions#tabline#enabled = 1
-  " タブに番号を表示する
-  let g:airline#extensions#tabline#buffer_idx_mode = 1
-  " タブの切替キーバインド
-  nmap <C-left> <Plug>AirlineSelectPrevTab
-  nmap <C-right> <Plug>AirlineSelectNextTab
-
-  let g:airline#extensions#whitespace#mixed_indent_algo = 1
-
-  if !exists('g:airline_symbols')
+set laststatus=2
+" Powerline系フォントを利用する
+let g:airline_powerline_fonts = 1
+" theme
+let g:airline_theme = 'term'
+" タブを有効化する
+let g:airline#extensions#tabline#enabled = 1
+" タブに番号を表示する
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+" タブの切替キーバインド
+nmap <C-left> <Plug>AirlineSelectPrevTab
+nmap <C-right> <Plug>AirlineSelectNextTab
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+if !exists('g:airline_symbols')
     let g:airline_symbols = {}
-  endif
+endif
 
-  " unicode symbols
-  " タブの区切り文字を指定する
-  " let g:airline_left_sep = '▶'
-  " let g:airline_right_sep = '◀'
-  let g:airline_symbols.crypt = '🔒'
-  " let g:airline_symbols.linenr = '␊'
-  " let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.linenr = '¶'
-  let g:airline_symbols.maxlinenr = '☰'
-  " let g:airline_symbols.maxlinenr = ''
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'ρ'
-  " let g:airline_symbols.paste = 'Þ'
-  " let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.spell = 'Ꞩ'
-  let g:airline_symbols.notexists = '∄'
-  let g:airline_symbols.whitespace = 'Ξ'
+" unicode symbols
+" タブの区切り文字を指定する
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.maxlinenr = '☰'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.spell = 'Ꞩ'
+" let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.whitespace = 'Ξ'
 '''
 
 # [[plugins]] # ステータスラインの色付け（※air-lineより軽いのでこちらに変更）
@@ -141,31 +130,6 @@ hook_add = '''
 # \ 'colorscheme': 'wombat',
 # \ }
 # '''
-
-[[plugins]] # カーソル位置のコンテキストのfiletypeを判定するライブラリ
-repo = 'Shougo/context_filetype.vim'
-
-[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
-repo = 'osyo-manga/vim-precious'
-depends = ['context_filetype.vim']
- hook_add = '''
-" カーソル移動時の自動切り替えを無効化
-" このオプションは filetype ごとに設定可能
-" "*" は全ての filetype に影響する
-let g:precious_enable_switch_CursorMoved = {
-\   "*" : 0
-\}
-let g:precious_enable_switch_CursorMoved_i = {
-\   "*" : 0
-\}
-
-" insert に入った時にスイッチし、抜けた時に元に戻す
-augroup test
-   autocmd!
-   autocmd InsertEnter * :PreciousSwitch
-   autocmd InsertLeave * :PreciousReset
-augroup END
-'''
 
 # -----------------------------------------
 # Git関連
@@ -264,6 +228,11 @@ repo = 'altercation/vim-colors-solarized'
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
+hook_add = '''
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_conceal = 0
+    let g:vim_markdown_conceal_code_blocks = 0
+'''
 
 [[plugins]]
 repo = 'kannokanno/previm'
@@ -282,8 +251,72 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'fatih/vim-go'
 
-# -----------------------------------------------------
-# %による移動の強化
-# -----------------------------------------------------
-[[plugins]]
+[[plugins]] # カーソル位置のコンテキストのfiletypeを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+ hook_add = '''
+" カーソル移動時の自動切り替えを無効化
+" このオプションは filetype ごとに設定可能
+" "*" は全ての filetype に影響する
+let g:precious_enable_switch_CursorMoved = {
+\   "*" : 0
+\}
+let g:precious_enable_switch_CursorMoved_i = {
+\   "*" : 0
+\}
+
+" insert に入った時にスイッチし、抜けた時に元に戻す
+augroup test
+   autocmd!
+   autocmd InsertEnter * :PreciousSwitch
+   autocmd InsertLeave * :PreciousReset
+augroup END
+'''
+
+[[plugins]] # %による移動の強化
 repo = 'andymass/vim-matchup'
+
+[[plugins]] # テキスト揃えを簡単に実現する
+repo = 'junegunn/vim-easy-align'
+
+[[plugins]] # シングル・ダブルクウォートの入れ替えなど
+repo = 'tpope/vim-surround'
+hook_add = '''
+" ビジュアルモードで選択後、"S-"入力で選択範囲をpタグで囲む
+let g:surround_{char2nr("-")} = "<p>\r</p>"
+'''
+
+[[plugins]] # 置換結果をプレビュー
+repo = 'markonm/traces.vim'
+
+[[plugins]] # リピートを強化
+repo = 'tpope/vim-repeat'
+
+[[plugins]] # マークを可視化
+repo = 'jacquesbh/vim-showmarks'
+hook_add = '''
+augroup show_marks_sync
+    autocmd!
+    autocmd BufReadPost * silent! DoShowMarks
+augroup END
+'''
+
+[[plugins]] # スクロールをスムーズアニメーション化
+repo = 'yuttie/comfortable-motion.vim'
+hook_add = '''
+    let g:comfortable_motion_interval = 2400 / 60
+    let g:comfortable_motion_fricion = 100
+    let g:comfortable_motion_air_drag = 3.0
+'''
+
+# [[plugins]] # 自動で閉じるタグを挿入 ※動きがもっさりなのでNG
+# repo = 'alvan/vim-closetag'
+# hook_add = '''
+# let g:closetag_filenames = '*.html,*.vue'
+# '''
+
+[[plugins]] # カッコを書き始めると同時に閉じるカッコも挿入する
+repo = 'jiangmiao/auto-pairs'
